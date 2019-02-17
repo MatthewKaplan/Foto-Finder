@@ -4,30 +4,35 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="normalize.css">
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <title>Foto Finder</title>
 </head>
 <body>
   <header>
-    <h1>PHOTO<img src="">FINDER</h1>
+    <h1>FOTO<img class="logo" src="images/foto-finder-logo.svg">FINDER</h1>
     <form class="search-form">
       <input type="text" class="search-input" placeholder="Search">
-      <button type="submit" class="search-btn"><img src=""></button>
+      <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
     </form>
   </header>
   <main>
-    <form class="input-form">
-      <label>Title</label>
-      <input type="text" class="title-input">
-      <label>Caption</label>
-      <input type="text" class="caption-input">
-      <button>Choose File</button>
-      <button>View Favorites</button>
-      <button>Add to Album</button>
-    </form>
+    <section class="top-section">
+      <form class="input-form">
+        <label>Title</label>
+        <input type="text" class="title-input">
+        <label>Caption</label>
+        <input type="text" class="caption-input">
+        <div class="buttons">
+          <button>Choose File</button>
+          <button>View Favorites</button>
+          <button>Add to Album</button>
+        </div>
+      </form>
+    </section>
+    <section class="card-section">
+        
+    </section>
   </main>
-  <section class="card-section">
-    
-  </section> 
 </body>
 <script type="text/javascript" src="photo.js"></script>
 <script type="text/javascript" src="main.js"></script>
