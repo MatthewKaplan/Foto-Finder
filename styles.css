@@ -55,7 +55,7 @@ h1 {
 .top-section {
   background-color: #3E2A36;
   display: flex;
-  height: 100%;
+  height: 320px;
   justify-content: center;
 }
 
@@ -74,13 +74,53 @@ label {
   background-color: #5B4647;
   color: #FFF;
   border: none;
+  height: 45px;
+}
+
+input {
+  height: 45px;
 }
 
 /*---- Bottom Section ------*/
 
 .card-section {
   background-color: #C1B2B3;
-  height: 390px;
+  height: 1000px;
+  display: grid;
+  grid-gap: 20px 20px;
+  grid-template-columns: repeat(auto-fit, 230px);
+  grid-template-rows: auto;
+  justify-content: center;
+  padding: 20px 0px 20px 0px;
+}
+
+.card {
+  background-color: #FFF;
+  border: solid 2px #d4d2d8; 
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: space-between;
+  width: 230px;
+}
+
+.card-btn {
+  background-color: #5b4447;
+  display: flex;
+  height: 50px;
+}
+
+.card-btn button {
+  width: 100%;
+  border: none;
+} 
+
+.trash-btn {
+  background: url(images/delete.svg) no-repeat center;
+}
+
+.favorite-btn {
+  background: url(images/favorite.svg) no-repeat center;
 }
 
 .buttons {
