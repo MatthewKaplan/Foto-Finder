@@ -5,11 +5,13 @@ class Photo {
     this.caption = caption;
     this.image = image;
   }
-  saveToStorage() {
-
+  saveToStorage(array) {
+    console.log('Made it to storage');
+    localStorage.setItem("photoCards", JSON.stringify(array));
   }
-  deleteFromStorage() {
-
+  deleteFromStorage(i) {
+    imagesArr.splice(i, 1);
+    this.saveToStorage(imagesArr);
   }
   updatePhotoCard() {
     
