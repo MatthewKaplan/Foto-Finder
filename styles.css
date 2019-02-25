@@ -158,6 +158,8 @@ button:hover {
 
 #photo-area {
   background-color: #C2B2B4;
+  display: flex;
+  flex-wrap: wrap;
   min-height: 60vh;
   padding: 40px 0;
 }
@@ -169,13 +171,18 @@ button:hover {
   grid-template-columns: repeat(auto-fill, 300px);
 }
 
-.photo-card {
-  background-color: white;
-  border: 2px solid #5B4447;
+p {
   color: black;
-  height: 325px;
-  margin-left: 100px;
-  width: 250px;
+}
+
+.photo-card {
+  background-color: #FFFFFF;
+  border: 2px #938284 solid;
+  height: 500px;
+  margin: 20px;
+  min-width: 295px;
+  position: relative;
+  width: 22%;
 }
 
 .photo-title {
@@ -186,6 +193,7 @@ button:hover {
 }
 
 .uploaded-photo {
+  object-fit: contain;
   width: 100%;
 }
 
