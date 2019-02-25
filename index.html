@@ -14,7 +14,7 @@
       <h1>FOTO<img class="logo" src="images/foto-finder-logo.svg">FINDER</h1>
       <div id="search-bar">
         <input type="text" id="search-input" placeholder="Search">
-        <p><i class="fas fa-search"></i></p>
+        <button class="search-btn"><i class="fas fa-search"></i></button>
       </div> 
       </header>
       <section id="input-area">
@@ -27,27 +27,27 @@
             <label for="caption">Caption</label>
             <input type="text" name="caption" id="caption-input"></textarea>
           </div>
+          <input type="file" class="file-input" id="image-upload" name="image-upload" accept="image/*">
           <label for="image-upload" id="image-upload-label">Choose File</label>
-          <input type="file" id="image-upload" name="image-upload" accept="image/*" title="&nbsp;">
           <div class="form-button-container">
-            <button class="show-favorites-btn">View <span>0</span> Favorites</button>
-            <button type="submit" id="save-button">Add to Album</button>
+            <button class="show-favorites-btn" id="view-favorites-btn">View <span>0</span> Favorites</button>
+            <button type="submit" id="add-to-album-btn">Add to Album</button>
           </div>
         </form>
       </section>
   </div>
   <main id="photo-area">
-      <article data-id class="photo-card">
+      <!-- <article class="photo-card">
         <h2 contenteditable="true" class="photo-title">Phish</h2>
         <img src="images/phishTest.jpg" alt="uploaded-photo" class="uploaded-photo">
         <div>
           <p contenteditable="true" class="photo-caption">Phish is the greatest band in the world!</p>
         </div>
         <div class="card-button-container">
-          <img src="images/delete.svg" alt="delete" class="delete-icon">
-          <img src="images/favorite.svg" alt="favorite" class="favorite-icon">
+          <img src="images/delete.svg" alt="delete" class="delete-icon" id="trash-can">
+          <img src="images/favorite.svg" alt="favorite" class="favorite-icon" id="favorite-heart">
         </div>
-      </article>
+      </article> -->
   </main>
 </body>
 <script type="text/javascript" src="photo.js"></script>
