@@ -9,15 +9,14 @@
   <title>Foto Finder</title>
 </head>
 <body>
-  <div class="wrapper">
     <header>
       <h1>FOTO<img class="logo" src="images/foto-finder-logo.svg">FINDER</h1>
-      <div id="search-bar">
+      <form id="search-bar">
         <input type="text" id="search-input" placeholder="Search">
         <button class="search-btn"><i class="fas fa-search"></i></button>
-      </div> 
+      </form> 
       </header>
-      <section id="input-area">
+      <section class="wrapper" id="input-area">
         <form id="photo-input">
           <div class="input-wrapper">
             <label for="title">Title</label>
@@ -35,10 +34,9 @@
           </div>
         </form>
       </section>
-  </div>
   <main id="photo-area">
       <!-- <article class="photo-card">
-        <h2 contenteditable="true" class="photo-title">Phish</h2>
+        <p contenteditable="true" class="photo-title">Phish</p>
         <img src="images/phishTest.jpg" alt="uploaded-photo" class="uploaded-photo">
         <div>
           <p contenteditable="true" class="photo-caption">Phish is the greatest band in the world!</p>

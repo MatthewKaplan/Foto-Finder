@@ -15,16 +15,20 @@ var reader = new FileReader();
 
 photoArea.addEventListener('click', buttonChecker);
 addToAlbumBtn.addEventListener('click', loadImg);
-window.addEventListener('load', appendPhotos(imagesArr));
+window.addEventListener('load', appendPhotos);
 
-function appendPhotos(array) {
-  imagesArr = []
-  array.forEach(function(obj) {
-    var card = new Photo(obj.id, obj.title, obj.caption, obj.image);
-    console.log(card);
-    imagesArr.push(Photo);
-    generatePhotoCard(card);
-  });
+function appendPhotos() {
+  if (imagesArr.length === 0) {
+    photoArea.innerText = `PLEASE ADD A PHOTO`;
+  } else if (imagesArr.length <= 10) {
+    for (var i = 0; i < imagesArr.length; i++) {
+      generatePhotoCard(imagesArr[i]);
+    }  
+  } else {
+    for (var i = 0; i < imagesArr.length; i++) {
+      generatePhotoCard(imagesArr[i]);
+    }
+  }
 }
 
 function loadImg(e) {
@@ -39,11 +43,13 @@ function createPhotoCard(e) {
   var photoCard = new Photo(Date.now(), title.value, caption.value, e.target.result);
   imagesArr.push(photoCard);
   photoCard.saveToStorage(imagesArr);
+  appendPhotos();
+  // generatePhotoCard(photoCard);
 }
 
 function generatePhotoCard(card) {
-  var card = `<article id="${card.id}" class="photo-card">
-        <h2 contenteditable="true" class="photo-title">${card.title}</h2>
+  var card = `<article data-id=${card.id} class="photo-card">
+        <p contenteditable="true" class="photo-title">${card.title}</p>
         <img src="${card.image}" alt="uploaded-photo" class="uploaded-photo">
         <div>
           <p contenteditable="true" class="photo-caption">${card.caption}</p>
@@ -59,7 +65,29 @@ function generatePhotoCard(card) {
 function buttonChecker(e) {
   e.preventDefault();
   if (e.target.id === 'trash-can') {
-    e.target.parentElement.parentElement.remove();
-    // photoToDelete.deleteFromStorage(i);
+    deleteCard(e);
   }
 }
+
+function reinstantiatePhoto(imagesArr, i) {
+  return new Photo(imagesArr[i].id, imagesArr[i].title, imagesArr[i].caption, imagesArr[i].image);
+}
+
+function deleteCard(e) {
+  const i = getIndex(e);
+  console.log(i);
+  const photoToDelete = reinstantiatePhoto(imagesArr, i);
+  console.log(photoToDelete);
+  e.target.closest('.photo-card').remove();
+  photoToDelete.deleteFromStorage(imagesArr, i);
+}
+
+
+function getIndex(e) {
+  const parent = e.target.closest('article');
+  console.log(parent);
+  const parentID = parseInt(parent.dataset.id);
+  console.log(parentID);
+  return imagesArr.findIndex(photo => photo.id === parentID);
+}
+
