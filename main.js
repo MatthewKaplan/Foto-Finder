@@ -13,6 +13,7 @@ var trashCan = document.querySelector('#trash-can');
 var imagesArr = JSON.parse(localStorage.getItem('photoCards')) || [];
 var reader = new FileReader();
 
+// searchInput.addEventListener('keyup', searchPhotos);
 photoArea.addEventListener('click', buttonChecker);
 addToAlbumBtn.addEventListener('click', loadImg);
 window.addEventListener('load', appendPhotos);
@@ -43,8 +44,7 @@ function createPhotoCard(e) {
   var photoCard = new Photo(Date.now(), title.value, caption.value, e.target.result);
   imagesArr.push(photoCard);
   photoCard.saveToStorage(imagesArr);
-  appendPhotos();
-  // generatePhotoCard(photoCard);
+  generatePhotoCard(photoCard);
 }
 
 function generatePhotoCard(card) {
@@ -60,6 +60,12 @@ function generatePhotoCard(card) {
         </div>
       </article>`
       photoArea.insertAdjacentHTML('afterbegin', card);
+      clearInputs();
+}
+
+function clearInputs() {
+  title.value = '';
+  caption.value = '';
 }
 
 function buttonChecker(e) {
@@ -90,4 +96,29 @@ function getIndex(e) {
   console.log(parentID);
   return imagesArr.findIndex(photo => photo.id === parentID);
 }
+
+// function searchPhotos() {
+//   var searchResults = [];
+//   var searchQuery = searchInput.value.toLowerCase();
+//   var imagesArr = localStorage.imagesArr || '[]';
+//   imagesArr = JSON.parse(imagesArr);
+//   imagesArr.forEach(idea => {
+//     if(idea.title.toLowerCase().includes(searchQuery) || idea.caption.toLowerCase().includes(searchQuery)) {
+//       searchResults.push(imagesArr);
+//     }
+//   });
+//   appendPhotos(searchResults);
+// }
+
+
+
+
+
+
+
+
+
+
+
+
 
