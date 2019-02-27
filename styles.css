@@ -78,7 +78,6 @@ input[type='text'] {
   color: grey;
   font-size: 20px;
   height: 50px;
-  height: 50px;
   line-height: 50px;
   padding-left: 15px;
 }
@@ -86,7 +85,7 @@ input[type='text'] {
 .input-wrapper {
   margin: 15px auto;
   position: relative;
-  width: 60%;
+  width: 50%;
 }
 
 .input-wrapper > * {
@@ -95,7 +94,7 @@ input[type='text'] {
 }
 
 label {
-  color:  #C2B2B4;
+  color: #C2B2B4;
   font-size: 20px;
   padding-bottom: 10px;
 }
@@ -109,12 +108,26 @@ button:focus {
   display: none;
 }
 
-.favorite-false {
+.favorite-btn {
   background: url(images/favorite.svg) right center no-repeat;
+  border: none;
+  height: 40px;
+  width: 40px;
 }
 
-.favorite-true {
+.favorite-btn-active,
+.favorite-btn:hover {
   background: url(images/favorite-active.svg) right center no-repeat;
+}
+
+.delete-btn {
+  background-image: url("images/delete.svg") no-repeat contain;
+  height: 45px;
+  width: 45px;
+}
+
+.delete-btn:hover {
+  background-image: url("images/delete-active.svg");
 }
 
 .image-upload-label {
@@ -126,7 +139,7 @@ button:focus {
   justify-content: center;
   margin: 40px auto;
   padding-bottom: 0;
-  width: 60%;
+  width: 50%;
 }
 
 .image-upload-label:hover {
@@ -137,7 +150,7 @@ button:focus {
   display: flex;
   justify-content: space-between;
   margin: auto;
-  width: 60%;
+  width: 50%;
 }
 
 .form-button-container > button {
@@ -163,19 +176,27 @@ button:hover {
 
 /* Photos area */
 
-#photo-area {
-  background-color: #C2B2B4;
+.photo-area-text {
+  color: #FFF;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
-  min-height: 60vh;
-  padding: 25px 40px;
+  font-size: 40px;
+  font-weight: 800;
+  justify-content: center;
+  margin-top: 240px;
+  width: 100%;
 }
 
-#photo-area .wrapper {
+main {
+  align-items:center;
+  background-color: #C2B2B4;
+  border: 1px #C2B2B4 solid;
   display: grid;
-  grid-row-gap: 40px;
-  grid-template-columns: repeat(auto-fill, 300px);
+  grid-gap: 30px;
+  grid-template-columns: repeat(4, 250px);
+  height: 100%;
+  justify-content: center;
+  min-height: 55vh;
+  padding: 30px 50px;
 }
 
 p {
@@ -183,20 +204,23 @@ p {
 }
 
 .photo-card {
-  background-color: #FFFFFF;
-  border: 2px #938284 solid;
-  height: 415px;
-  margin: 20px;
-  min-width: 295px;
-  position: relative;
-  width: 22%;
+  background-color: white;
+  border: #938284 1px solid;
+  display:flex;
+  flex-direction: column;
+  height: 380px;
+  min-width: 250px;
+  width: 250px;
 }
 
 .photo-title {
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0;
-  padding: 10px 15px;
+  align-items:center;
+  color: #3E2A35;
+  display:flex;
+  font-size: 18px;
+  height: 30%;
+  margin: 10px 10px;
+  max-height: 21px;
 }
 
 .uploaded-photo {
@@ -205,49 +229,28 @@ p {
 }
 
 .photo-caption {
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.2;
-  margin: 0 auto 10px 0;
-  overflow-y: auto;
-  overflow: hidden;
-  padding: 5px 15px;
+  color: #3E2A35;
+  font-size: 18px;
+  height: 100px;
+  line-height: 25px;
+  margin: 10px;
+  padding: 0;
 }
 
 .photo-caption:focus {
   outline: 10;
 }
 
-.photo-caption p {
-  margin: 0;
-}
-
 .card-button-container {
   align-items: center;
-  background-color: #5B4447;
-  bottom: 0;
+  background-color: #584547;
   display: flex;
-  flex-direction: row;
-  height: 60px;
+  height: 12%;
   justify-content: space-between;
   padding: 0 15px;
-  position: absolute;
-  width: 100%;
 }
 
-.favorite-icon {
-  height: 40px;
-  width: 40px;
-  border: none;
-}
-
-
-.card-button-container img {
-  height: 30px;
-}
-
-.card-button-container img:hover,
-.card-button-container button:hover {
+.card-button-container label:hover {
   cursor: pointer;
 }
 
@@ -269,7 +272,28 @@ p {
   margin-bottom: 0;
 }
 
+.delete-btn {
+  background: url(images/delete.svg) left center no-repeat;
+  height: 35px;
+}
+
+@media only screen and (max-width: 1150px) {
+  main {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  main {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
 @media only screen and (max-width: 768px) {
+
+  .photo-area-text {
+    font-size: 30px;
+  }
 
   .fas {
     margin-right: 5px;
@@ -309,6 +333,11 @@ p {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  main {
+    grid-template-columns: auto;
+  } 
+}
 
 @media only screen and (max-width: 375px) {
 
