@@ -21,8 +21,10 @@ showLessBtn.addEventListener('click', lessPhotos);
 inputArea.addEventListener('change', buttenEnabler);
 searchInput.addEventListener('keyup', searchPhotos);
 photoArea.addEventListener('click', buttonChecker);
+photoArea.addEventListener('focusout', updateText);
 addToAlbumBtn.addEventListener('click', loadImg);
 window.addEventListener('load', appendPhotos(imagesArr));
+
 
 function appendPhotos(imagesArr) {
   photoArea.innerHTML = '';
@@ -56,10 +58,10 @@ function createPhotoCard(e) {
 
 function generatePhotoCard(card) {
   var card = `<article data-id=${card.id} class="photo-card">
-        <p contenteditable="true" class="photo-title">${card.title}</p>
+        <p contenteditable="true" class="photo-title" id="photo-title">${card.title}</p>
         <img src="${card.image}" alt="uploaded-photo" class="uploaded-photo">
         <div>
-          <p contenteditable="true" class="photo-caption">${card.caption}</p>
+          <p contenteditable="true" class="photo-caption" id="photo-caption">${card.caption}</p>
         </div>
         <div class="card-button-container">
           <img src="images/delete.svg" alt="delete" class="delete-icon" id="trash-can">
@@ -88,8 +90,8 @@ function reinstantiatePhoto(imagesArr, i) {
 }
 
 function deleteCard(e) {
-  const i = getIndex(e);
-  const photoToDelete = reinstantiatePhoto(imagesArr, i);
+  var i = getIndex(e);
+  var photoToDelete = reinstantiatePhoto(imagesArr, i);
   e.target.closest('.photo-card').remove();
   photoToDelete.deleteFromStorage(imagesArr, i);
 }
@@ -146,7 +148,19 @@ function lessPhotos() {
 
 
 
-
+function updateText(e) {
+  var i = getIndex(e);
+  var photoToUpdate = reinstantiatePhoto(imagesArr, i);
+  imagesArr.push(photoToUpdate);
+  if (e.target.id === 'photo-title') {
+    photoToUpdate.title = e.target.innerText;
+  }
+  if (e.target.id === 'photo-caption') {
+    photoToUpdate.caption = e.target.innerText;
+  }
+  photoToUpdate.saveToStorage(imagesArr);
+  photoToUpdate.updateStorage(imagesArr, i);
+}
 
 
 

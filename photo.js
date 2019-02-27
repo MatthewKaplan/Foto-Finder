@@ -7,14 +7,19 @@ class Photo {
   }
 
   saveToStorage(array) {
-    console.log('Made it to storage');
-    localStorage.setItem("photoCards", JSON.stringify(array));
+    localStorage.setItem('photoCards', JSON.stringify(array));
   }
 
   deleteFromStorage(imagesArr, i) {
     console.log('Made it to deleteFromStorage');
     imagesArr.splice(i, 1);
     this.saveToStorage(imagesArr);
+  }
+
+  updateStorage(imagesArr, i) {
+    console.log('updateStorage')
+    imagesArr.splice(i, 1);
+    localStorage.setItem('photoCards', JSON.stringify(imagesArr));
   }
 
   updatePhotoCard() {
