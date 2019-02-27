@@ -1,40 +1,38 @@
+var input = document.querySelector('.file-input');
 var title = document.querySelector('#title-input');
-var caption = document.querySelector('#caption-input');
-var imageUpload = document.querySelector('#image-upload');
-var addToAlbumBtn = document.querySelector('#add-to-album-btn');
-var searchInput = document.querySelector('#search-input');
-var viewFavoritesBtn = document.querySelector('#view-favorites-btn');
+var trashCan = document.querySelector('#trash-can');
 var searchBtn = document.querySelector('.search-btn');
 var photoArea = document.querySelector('#photo-area');
-var input = document.querySelector('.file-input');
-var trashCan = document.querySelector('#trash-can');
 var inputArea = document.querySelector('#input-area');
+var caption = document.querySelector('#caption-input');
+var imageUpload = document.querySelector('#image-upload');
+var searchInput = document.querySelector('#search-input');
 var showMoreBtn = document.querySelector('.show-more-btn');
 var showLessBtn = document.querySelector('.show-less-btn');
+var addToAlbumBtn = document.querySelector('#add-to-album-btn');
 var favoriteCounterEl = document.querySelector('.favorite-counter');
+var viewFavoritesBtn = document.querySelector('#view-favorites-btn');
 
 
 var imagesArr = JSON.parse(localStorage.getItem('photoCards')) || [];
 var reader = new FileReader();
-var favoriteArray = [];
 
 
+addToAlbumBtn.addEventListener('click', loadImg);
 showMoreBtn.addEventListener('click', morePhotos);
 showLessBtn.addEventListener('click', lessPhotos);
-inputArea.addEventListener('change', buttenEnabler);
-searchInput.addEventListener('keyup', searchPhotos);
+searchBtn.addEventListener('click', searchPhotos);
 photoArea.addEventListener('click', buttonChecker);
 photoArea.addEventListener('focusout', updateText);
-addToAlbumBtn.addEventListener('click', loadImg);
+searchInput.addEventListener('keyup', searchPhotos);
+inputArea.addEventListener('change', buttenEnabler);
 window.addEventListener('load', appendPhotos(imagesArr));
-
-
 
 
 function appendPhotos(imagesArr) {
   photoArea.innerHTML = '';
   if (imagesArr.length === 0) {
-    photoArea.innerText = `PLEASE ADD A PHOTO`;
+    photoArea.innerHTML = `<p class="photo-area-text">Add some photos to your album.</p>`;
   } else if (imagesArr.length <= 10) {
     for (var i = 0; i < 10; i++) {
       generatePhotoCard(imagesArr[i]);
@@ -49,7 +47,7 @@ function appendPhotos(imagesArr) {
 function loadImg() {
   if (input.files[0]) {
     reader.readAsDataURL(input.files[0]); 
-    reader.onload = createPhotoCard
+    reader.onload = createPhotoCard;
   }
 }
 
@@ -61,36 +59,29 @@ function createPhotoCard(e) {
 }
 
 function generatePhotoCard(card) {
-  var card = `<article data-id=${card.id} class="photo-card">
-        <p contenteditable="true" class="photo-title" id="photo-title">${card.title}</p>
-        <img src="${card.image}" alt="uploaded-photo" class="uploaded-photo">
-        <div>
-          <p contenteditable="true" class="photo-caption" id="photo-caption">${card.caption}</p>
-        </div>
-        <div class="card-button-container">
-          <img src="images/delete.svg" alt="delete" class="delete-icon" id="trash-can">
-          <label class="favorite-icon favorite-heart favorite-false" id="favorite-heart"></label>
-          <label class="favorite-icon favorite-active-heart favorite-true hidden" id="favorite-active-heart"></label>
-        </div>
-      </article>`
-      photoArea.insertAdjacentHTML('afterbegin', card);
-      clearInputs();
+  var card = 
+    `<article data-id=${card.id} class="photo-card">
+      <p contenteditable="true" class="photo-title" id="photo-title">${card.title}</p>
+      <img src="${card.image}" alt="uploaded-photo" class="uploaded-photo">
+      <div>
+        <p contenteditable="true" class="photo-caption" id="photo-caption">${card.caption}</p>
+      </div>
+      <div class="card-button-container">
+        <label class="delete-btn" id="trash-can"></label>
+        <label class="favorite-btn favorite-heart" id="favorite-heart"></label>
+      </div>
+    </article>`
+  photoArea.insertAdjacentHTML('afterbegin', card);
+  clearInputs();
 }
 
 function clearInputs() {
   title.value = '';
   caption.value = '';
-  addToAlbumBtn.disabled = true;
 }
 
 function buttonChecker(e) {
   e.preventDefault();
-  if (e.target.id === 'favorite-heart') {
-    favoriteHeart(e);
-  }
-  if (e.target.id === 'favorite-active-heart') {
-    favoriteActiveHeart(e);
-  }
   if (e.target.id === 'trash-can') {
     deleteCard(e);
   }
@@ -107,14 +98,14 @@ function deleteCard(e) {
   photoToDelete.deleteFromStorage(imagesArr, i);
 }
 
-
 function getIndex(e) {
   const parent = e.target.closest('article');
   const parentID = parseInt(parent.dataset.id);
   return imagesArr.findIndex(photo => photo.id === parentID);
 }
 
-function searchPhotos() {
+function searchPhotos(e) {
+  e.preventDefault();
   var searchResults = [];
   var searchQuery = searchInput.value.toLowerCase();
   var photos = localStorage.photoCards || '[]';
@@ -157,8 +148,6 @@ function lessPhotos() {
   appendPhotos(photos);
 }
 
-
-
 function updateText(e) {
   var i = getIndex(e);
   var photoToUpdate = reinstantiatePhoto(imagesArr, i);
@@ -170,34 +159,5 @@ function updateText(e) {
     photoToUpdate.caption = e.target.innerText;
   }
   photoToUpdate.saveToStorage(imagesArr);
-  photoToUpdate.updateStorage(imagesArr, i);
+  photoToUpdate.updatePhotoCard(imagesArr, i);
 }
-
-function favoriteCounter() {
-  var favoriteCounter = 0;
-  for (var i = 0; i < imagesArr.length; i++) {
-    if (imagesArr[i].favorite === true) {
-      favoriteCounter++
-    }
-  }
-  favoriteCounterEl.innerText = favoriteCounter;
-}
-
-function favoriteHeart(e) {
-  var favoriteBtn = document.querySelector('.favorite-heart');
-  var favoriteActiveBtn = document.querySelector('.favorite-active-heart');
-  favoriteBtn.classList.add('hidden');
-  favoriteActiveBtn.classList.remove('hidden');
-}
-
-
-function favoriteActiveHeart(e) {
-  var favoriteBtn = document.querySelector('.favorite-heart');
-  var favoriteActiveBtn = document.querySelector('.favorite-active-heart');
-  favoriteBtn.classList.remove('hidden');
-  favoriteActiveBtn.classList.add('hidden');
-}
-
-
-
-

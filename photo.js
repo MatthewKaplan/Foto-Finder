@@ -11,18 +11,12 @@ class Photo {
   }
 
   deleteFromStorage(imagesArr, i) {
-    console.log('Made it to deleteFromStorage');
     imagesArr.splice(i, 1);
     this.saveToStorage(imagesArr);
   }
 
-  updateStorage(imagesArr, i) {
-    console.log('updateStorage')
+  updatePhotoCard(imagesArr, i) {
     imagesArr.splice(i, 1);
     localStorage.setItem('photoCards', JSON.stringify(imagesArr));
-  }
-
-  updatePhotoCard() {
-    
   }
 }
