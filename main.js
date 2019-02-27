@@ -9,11 +9,15 @@ var photoArea = document.querySelector('#photo-area');
 var input = document.querySelector('.file-input');
 var trashCan = document.querySelector('#trash-can');
 var inputArea = document.querySelector('#input-area');
+var showMoreBtn = document.querySelector('.show-more-btn');
+var showLessBtn = document.querySelector('.show-less-btn');
 
 
 var imagesArr = JSON.parse(localStorage.getItem('photoCards')) || [];
 var reader = new FileReader();
 
+showMoreBtn.addEventListener('click', morePhotos);
+showLessBtn.addEventListener('click', lessPhotos);
 inputArea.addEventListener('change', buttenEnabler);
 searchInput.addEventListener('keyup', searchPhotos);
 photoArea.addEventListener('click', buttonChecker);
@@ -25,11 +29,11 @@ function appendPhotos(imagesArr) {
   if (imagesArr.length === 0) {
     photoArea.innerText = `PLEASE ADD A PHOTO`;
   } else if (imagesArr.length <= 10) {
-    for (var i = 0; i < imagesArr.length; i++) {
+    for (var i = 0; i < 10; i++) {
       generatePhotoCard(imagesArr[i]);
     }  
   } else {
-    for (var i = 0; i < imagesArr.length; i++) {
+    for (var i = imagesArr.length - 10; i < imagesArr.length; i++) {
       generatePhotoCard(imagesArr[i]);
     }
   }
@@ -117,8 +121,28 @@ function buttenEnabler() {
   }
 }
 
+function morePhotos() {
+  showMoreBtn.classList.add('hidden');
+  showLessBtn.classList.remove('hidden');
+  var photos = localStorage.photoCards || '[]';
+  photos = JSON.parse(photos);
+  if (!photos) {
+    return false;
+  } else {
+    photoArea.innerHTML = '';
+    for (var i = 0; i < photos.length; i++) {
+      generatePhotoCard(photos[i]);
+    }
+  }
+}
 
-
+function lessPhotos() {
+  showMoreBtn.classList.remove('hidden');
+  showLessBtn.classList.add('hidden');
+  var photos = localStorage.photoCards || '[]';
+  photos = JSON.parse(photos);
+  appendPhotos(photos);
+}
 
 
 

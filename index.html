@@ -27,12 +27,15 @@
             <input type="text" name="caption" id="caption-input"></textarea>
           </div>
           <input type="file" class="file-input" id="image-upload" name="image-upload" accept="image/*">
-          <label for="image-upload" id="image-upload-label">Choose File</label>
+          <label for="image-upload" class="image-upload-label">Choose File</label>
           <div class="form-button-container">
             <button class="show-favorites-btn" id="view-favorites-btn">View <span>0</span> Favorites</button>
             <button id="add-to-album-btn" class="disabled" disabled=true>Add to Album</button>
           </div>
-          <label class="show-more-btn" id="image-upload-label">Show More</label>
+          <div class="display-more">
+            <label class="image-upload-label show-more-btn">Show More</label>
+            <label class="image-upload-label show-less-btn hidden">Show Less</label>
+          </div>
         </form>
       </section>
   <main id="photo-area">
