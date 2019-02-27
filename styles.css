@@ -9,14 +9,9 @@ html,
 body {
   background-color: #3E2A35;
   color: white;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', sans-serif;
   font-size: 15px;
   margin: 0;
-}
-
-.wrapper {
-  margin: auto;
-  max-width: 1200px;
 }
 
 header {
@@ -114,6 +109,14 @@ button:focus {
   display: none;
 }
 
+.favorite-false {
+  background: url(images/favorite.svg) right center no-repeat;
+}
+
+.favorite-true {
+  background: url(images/favorite-active.svg) right center no-repeat;
+}
+
 .image-upload-label {
   align-items: center;
   background-color: #5B4447;
@@ -121,7 +124,7 @@ button:focus {
   display: flex;
   height: 50px;
   justify-content: center;
-  margin: 20px auto;
+  margin: 40px auto;
   padding-bottom: 0;
   width: 60%;
 }
@@ -232,17 +235,23 @@ p {
   width: 100%;
 }
 
+.favorite-icon {
+  height: 40px;
+  width: 40px;
+  border: none;
+}
+
 
 .card-button-container img {
   height: 30px;
 }
 
-.card-button-container img:hover {
+.card-button-container img:hover,
+.card-button-container button:hover {
   cursor: pointer;
 }
 
-button:hover,
-.image-upload-label:hover {
+.btn:hover {
   background-color: #938284;
 }
 
@@ -255,7 +264,16 @@ button:hover,
   cursor: auto;
 }
 
+.show-more-btn,
+.show-less-btn {
+  margin-bottom: 0;
+}
+
 @media only screen and (max-width: 768px) {
+
+  .fas {
+    margin-right: 5px;
+  }
 
   header {
     flex-direction: column;
@@ -264,6 +282,7 @@ button:hover,
 
   #search-bar {
     width: 60%;
+    margin-bottom: 25px;
   }
 
   h1 {
@@ -272,10 +291,6 @@ button:hover,
 
   #photo-area {
     justify-content: center;
-  }
-
-  .image-upload-label {
-    margin-bottom: 15px;
   }
 
   .form-button-container > * {
