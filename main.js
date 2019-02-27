@@ -11,10 +11,13 @@ var trashCan = document.querySelector('#trash-can');
 var inputArea = document.querySelector('#input-area');
 var showMoreBtn = document.querySelector('.show-more-btn');
 var showLessBtn = document.querySelector('.show-less-btn');
+var favoriteCounterEl = document.querySelector('.favorite-counter');
 
 
 var imagesArr = JSON.parse(localStorage.getItem('photoCards')) || [];
 var reader = new FileReader();
+var favoriteArray = [];
+
 
 showMoreBtn.addEventListener('click', morePhotos);
 showLessBtn.addEventListener('click', lessPhotos);
@@ -24,6 +27,8 @@ photoArea.addEventListener('click', buttonChecker);
 photoArea.addEventListener('focusout', updateText);
 addToAlbumBtn.addEventListener('click', loadImg);
 window.addEventListener('load', appendPhotos(imagesArr));
+
+
 
 
 function appendPhotos(imagesArr) {
@@ -41,8 +46,7 @@ function appendPhotos(imagesArr) {
   }
 }
 
-function loadImg(e) {
-  e.preventDefault();
+function loadImg() {
   if (input.files[0]) {
     reader.readAsDataURL(input.files[0]); 
     reader.onload = createPhotoCard
@@ -65,7 +69,8 @@ function generatePhotoCard(card) {
         </div>
         <div class="card-button-container">
           <img src="images/delete.svg" alt="delete" class="delete-icon" id="trash-can">
-          <img src="images/favorite.svg" alt="favorite" class="favorite-icon" id="favorite-heart">
+          <label class="favorite-icon favorite-heart favorite-false" id="favorite-heart"></label>
+          <label class="favorite-icon favorite-active-heart favorite-true hidden" id="favorite-active-heart"></label>
         </div>
       </article>`
       photoArea.insertAdjacentHTML('afterbegin', card);
@@ -80,6 +85,12 @@ function clearInputs() {
 
 function buttonChecker(e) {
   e.preventDefault();
+  if (e.target.id === 'favorite-heart') {
+    favoriteHeart(e);
+  }
+  if (e.target.id === 'favorite-active-heart') {
+    favoriteActiveHeart(e);
+  }
   if (e.target.id === 'trash-can') {
     deleteCard(e);
   }
@@ -162,6 +173,30 @@ function updateText(e) {
   photoToUpdate.updateStorage(imagesArr, i);
 }
 
+function favoriteCounter() {
+  var favoriteCounter = 0;
+  for (var i = 0; i < imagesArr.length; i++) {
+    if (imagesArr[i].favorite === true) {
+      favoriteCounter++
+    }
+  }
+  favoriteCounterEl.innerText = favoriteCounter;
+}
+
+function favoriteHeart(e) {
+  var favoriteBtn = document.querySelector('.favorite-heart');
+  var favoriteActiveBtn = document.querySelector('.favorite-active-heart');
+  favoriteBtn.classList.add('hidden');
+  favoriteActiveBtn.classList.remove('hidden');
+}
+
+
+function favoriteActiveHeart(e) {
+  var favoriteBtn = document.querySelector('.favorite-heart');
+  var favoriteActiveBtn = document.querySelector('.favorite-active-heart');
+  favoriteBtn.classList.remove('hidden');
+  favoriteActiveBtn.classList.add('hidden');
+}
 
 
 
