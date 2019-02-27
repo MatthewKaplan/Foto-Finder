@@ -13,7 +13,7 @@
       <h1>FOTO<img class="logo" src="images/foto-finder-logo.svg">FINDER</h1>
       <form id="search-bar">
         <input type="text" id="search-input" placeholder="Search">
-        <button class="search-btn"><i class="fas fa-search"></i></button>
+        <button class="search-btn"><i class="fas fa-search search-icon"></i></button>
       </form> 
       </header>
       <section class="wrapper" id="input-area">
@@ -30,8 +30,9 @@
           <label for="image-upload" id="image-upload-label">Choose File</label>
           <div class="form-button-container">
             <button class="show-favorites-btn" id="view-favorites-btn">View <span>0</span> Favorites</button>
-            <button type="submit" id="add-to-album-btn">Add to Album</button>
+            <button id="add-to-album-btn" class="disabled" disabled=true>Add to Album</button>
           </div>
+          <label class="show-more-btn" id="image-upload-label">Show More</label>
         </form>
       </section>
   <main id="photo-area">

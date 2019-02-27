@@ -1,6 +1,6 @@
 var title = document.querySelector('#title-input');
 var caption = document.querySelector('#caption-input');
-var imageUploadBtn = document.querySelector('#image-upload-btn');
+var imageUpload = document.querySelector('#image-upload');
 var addToAlbumBtn = document.querySelector('#add-to-album-btn');
 var searchInput = document.querySelector('#search-input');
 var viewFavoritesBtn = document.querySelector('#view-favorites-btn');
@@ -8,17 +8,20 @@ var searchBtn = document.querySelector('.search-btn');
 var photoArea = document.querySelector('#photo-area');
 var input = document.querySelector('.file-input');
 var trashCan = document.querySelector('#trash-can');
+var inputArea = document.querySelector('#input-area');
 
 
 var imagesArr = JSON.parse(localStorage.getItem('photoCards')) || [];
 var reader = new FileReader();
 
-// searchInput.addEventListener('keyup', searchPhotos);
+inputArea.addEventListener('change', buttenEnabler);
+searchInput.addEventListener('keyup', searchPhotos);
 photoArea.addEventListener('click', buttonChecker);
 addToAlbumBtn.addEventListener('click', loadImg);
-window.addEventListener('load', appendPhotos);
+window.addEventListener('load', appendPhotos(imagesArr));
 
-function appendPhotos() {
+function appendPhotos(imagesArr) {
+  photoArea.innerHTML = '';
   if (imagesArr.length === 0) {
     photoArea.innerText = `PLEASE ADD A PHOTO`;
   } else if (imagesArr.length <= 10) {
@@ -66,6 +69,7 @@ function generatePhotoCard(card) {
 function clearInputs() {
   title.value = '';
   caption.value = '';
+  addToAlbumBtn.disabled = true;
 }
 
 function buttonChecker(e) {
@@ -81,9 +85,7 @@ function reinstantiatePhoto(imagesArr, i) {
 
 function deleteCard(e) {
   const i = getIndex(e);
-  console.log(i);
   const photoToDelete = reinstantiatePhoto(imagesArr, i);
-  console.log(photoToDelete);
   e.target.closest('.photo-card').remove();
   photoToDelete.deleteFromStorage(imagesArr, i);
 }
@@ -91,25 +93,29 @@ function deleteCard(e) {
 
 function getIndex(e) {
   const parent = e.target.closest('article');
-  console.log(parent);
   const parentID = parseInt(parent.dataset.id);
-  console.log(parentID);
   return imagesArr.findIndex(photo => photo.id === parentID);
 }
 
-// function searchPhotos() {
-//   var searchResults = [];
-//   var searchQuery = searchInput.value.toLowerCase();
-//   var imagesArr = localStorage.imagesArr || '[]';
-//   imagesArr = JSON.parse(imagesArr);
-//   imagesArr.forEach(idea => {
-//     if(idea.title.toLowerCase().includes(searchQuery) || idea.caption.toLowerCase().includes(searchQuery)) {
-//       searchResults.push(imagesArr);
-//     }
-//   });
-//   appendPhotos(searchResults);
-// }
+function searchPhotos() {
+  var searchResults = [];
+  var searchQuery = searchInput.value.toLowerCase();
+  var photos = localStorage.photoCards || '[]';
+  photos = JSON.parse(photos);
+  photos.forEach(photo => {
+    if(photo.title.toLowerCase().includes(searchQuery) || photo.caption.toLowerCase().includes(searchQuery)) {
+      searchResults.push(photo);
+    }
+  });
+  appendPhotos(searchResults);
+}
 
+function buttenEnabler() {
+  if (title && caption && imageUpload.files[0]) {
+    addToAlbumBtn.disabled = false;
+    addToAlbumBtn.classList.remove('disabled');
+  }
+}
 
 
 

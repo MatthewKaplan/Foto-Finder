@@ -121,7 +121,7 @@ button:focus {
   display: flex;
   height: 50px;
   justify-content: center;
-  margin: 40px auto;
+  margin: 20px auto;
   padding-bottom: 0;
   width: 60%;
 }
@@ -153,6 +153,7 @@ button:hover {
 #input-area {
   padding-bottom: 40px;
 }
+
 
 /* Photos area */
 
@@ -235,6 +236,20 @@ p {
 
 .card-button-container img:hover {
   cursor: pointer;
+}
+
+button:hover,
+#image-upload-label:hover {
+  background-color: #938284;
+}
+
+#add-to-album-btn:active {
+  background-color: #3E2A35;
+}
+
+#add-to-album-btn:disabled {
+  background-color: #C2B2B4;
+  cursor: auto;
 }
 
 @media only screen and (max-width: 768px) {
