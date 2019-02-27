@@ -14,6 +14,8 @@ body {
   margin: 0;
 }
 
+/*-------- Header area ------------*/
+
 header {
   align-items: center;
   display: flex;
@@ -74,6 +76,8 @@ h1 img {
   border: none;
 }
 
+/*-------- Input area ------------*/
+
 input[type='text'] {
   color: grey;
   font-size: 20px;
@@ -108,16 +112,25 @@ button:focus {
   display: none;
 }
 
-.favorite-btn {
-  background: url(images/favorite.svg) right center no-repeat;
+button {
+  background-color:#5B4447;
   border: none;
-  height: 40px;
-  width: 40px;
+  height: 39px;
+  padding: 0;
 }
 
-.favorite-btn-active,
-.favorite-btn:hover {
-  background: url(images/favorite-active.svg) right center no-repeat;
+.favorite-btn {
+  background-image: url("images/favorite.svg");
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 50px;
+}
+
+.favorite-active-svg {
+  background-image: url("images/favorite-active.svg");
+  background-repeat: no-repeat;
+  height: 40px;
+  width: 50px;
 }
 
 .delete-btn {
@@ -174,7 +187,7 @@ button:hover {
   display: none;
 }
 
-/* Photos area */
+/*-------- Photo area ------------*/
 
 .photo-area-text {
   color: #FFF;
@@ -224,9 +237,10 @@ p {
 }
 
 .uploaded-photo {
-  object-fit: contain;
-  height: 100%;
-  width: 100%;
+  background-position: contain;
+  max-height: 190px;
+  min-height: 190px;
+  width:100%;
 }
 
 .photo-caption {
@@ -277,6 +291,8 @@ p {
   background: url(images/delete.svg) left center no-repeat;
   height: 35px;
 }
+
+/*-------- Media Queries ---------------*/
 
 @media only screen and (max-width: 1150px) {
   main {

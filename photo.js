@@ -1,12 +1,13 @@
 class Photo {
-  constructor(id, title, caption, image) {
+  constructor(id, title, caption, image, favorite) {
     this.id = id;
     this.title = title;
     this.caption = caption;
     this.image = image;
+    this.favorite = favorite;
   }
 
-  saveToStorage(array) {
+  saveToStorage(array) {    
     localStorage.setItem('photoCards', JSON.stringify(array));
   }
 

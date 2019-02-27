@@ -52,10 +52,9 @@ function loadImg() {
 }
 
 function createPhotoCard(e) {
-  var photoCard = new Photo(Date.now(), title.value, caption.value, e.target.result);
+  var photoCard = new Photo(Date.now(), title.value, caption.value, e.target.result, false);
   imagesArr.push(photoCard);
   photoCard.saveToStorage(imagesArr);
-  generatePhotoCard(photoCard);
 }
 
 function generatePhotoCard(card) {
@@ -68,7 +67,7 @@ function generatePhotoCard(card) {
       </div>
       <div class="card-button-container">
         <label class="delete-btn" id="trash-can"></label>
-        <label class="favorite-btn favorite-heart" id="favorite-heart"></label>
+        <button class="favorite-btn favorite-heart" id="favorite-heart"></button>
       </div>
     </article>`
   photoArea.insertAdjacentHTML('afterbegin', card);
@@ -85,10 +84,13 @@ function buttonChecker(e) {
   if (e.target.id === 'trash-can') {
     deleteCard(e);
   }
+  if (e.target.classList.contains("favorite-btn")) {
+    toggleFavoriteBtn(e);
+  }
 }
 
 function reinstantiatePhoto(imagesArr, i) {
-  return new Photo(imagesArr[i].id, imagesArr[i].title, imagesArr[i].caption, imagesArr[i].image);
+  return new Photo(imagesArr[i].id, imagesArr[i].title, imagesArr[i].caption, imagesArr[i].image, imagesArr[i].favorite);
 }
 
 function deleteCard(e) {
@@ -160,4 +162,19 @@ function updateText(e) {
   }
   photoToUpdate.saveToStorage(imagesArr);
   photoToUpdate.updatePhotoCard(imagesArr, i);
+}
+
+function toggleFavoriteBtn(e) {
+  var i = getIndex(e);
+  var photoToFavorite = reinstantiatePhoto(imagesArr, i);
+  imagesArr.push(photoToFavorite);
+  if(photoToFavorite.favorite === false) {
+    photoToFavorite.favorite = true;
+    e.target.classList.add("favorite-active-svg");
+  } else {
+    photoToFavorite.favorite = false;
+    e.target.classList.remove("favorite-active-svg");
+  }
+  photoToFavorite.saveToStorage(imagesArr);
+  photoToFavorite.updatePhotoCard(imagesArr, i);
 }
