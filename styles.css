@@ -1,4 +1,4 @@
-/* global */
+/*------ global ----------------*/
 *,
 *:before,
 *:after {
@@ -108,39 +108,13 @@ button:focus {
   outline: 0;
 }
 
-#image-upload {
-  display: none;
-}
-
 button {
   background-color:#5B4447;
+  background-repeat: no-repeat;
   border: none;
-  height: 39px;
+  height: 35px;
   padding: 0;
-}
-
-.favorite-btn {
-  background-image: url("images/favorite.svg");
-  background-repeat: no-repeat;
-  height: 40px;
-  width: 50px;
-}
-
-.favorite-active-svg {
-  background-image: url("images/favorite-active.svg");
-  background-repeat: no-repeat;
-  height: 40px;
-  width: 50px;
-}
-
-.delete-btn {
-  background-image: url("images/delete.svg") no-repeat contain;
-  height: 45px;
-  width: 45px;
-}
-
-.delete-btn:hover {
-  background-image: url("images/delete-active.svg");
+  width: 35px;
 }
 
 .image-upload-label {
@@ -153,10 +127,6 @@ button {
   margin: 40px auto;
   padding-bottom: 0;
   width: 50%;
-}
-
-.image-upload-label:hover {
-  cursor: pointer;
 }
 
 .form-button-container {
@@ -175,7 +145,8 @@ button {
   width: 42.5%;
 }
 
-button:hover {
+button:hover,
+.image-upload-label:hover {
   cursor: pointer;
 }
 
@@ -183,7 +154,8 @@ button:hover {
   padding-bottom: 40px;
 }
 
-.hidden {
+.hidden,
+#image-upload {
   display: none;
 }
 
@@ -246,7 +218,7 @@ p {
 .photo-caption {
   color: #3E2A35;
   font-size: 18px;
-  height: 100px;
+  height: 70px;
   line-height: 25px;
   margin: 10px;
   padding: 0;
@@ -260,13 +232,32 @@ p {
   align-items: center;
   background-color: #584547;
   display: flex;
-  height: 12%;
+  height: 50%;
   justify-content: space-between;
   padding: 0 15px;
 }
 
 .card-button-container label:hover {
   cursor: pointer;
+}
+
+.favorite-btn {
+  background-image: url("images/favorite.svg");
+}
+
+.favorite-active-svg,
+.favorite-btn:hover {
+  background-image: url("images/favorite-active.svg");
+}
+
+.delete-btn {
+  background: url("images/delete.svg") left center no-repeat;
+  width: 30px;
+  height: 30px;
+}
+
+.delete-btn:hover {
+  background-image: url("images/delete-active.svg");
 }
 
 .btn:hover {
@@ -287,10 +278,6 @@ p {
   margin-bottom: 0;
 }
 
-.delete-btn {
-  background: url(images/delete.svg) left center no-repeat;
-  height: 35px;
-}
 
 /*-------- Media Queries ---------------*/
 
